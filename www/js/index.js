@@ -48,7 +48,7 @@ var app = {
     },
     addCamera: function() {
         function onSuccess(imageData) {
-            var image = document.getElementById('myImage');
+            var image = document.getElementById('myImage1');
             image.src = "data:image/jpeg;base64," + imageData;
         }
 
