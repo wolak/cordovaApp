@@ -34,6 +34,7 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
+        app.addCamera();
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -44,5 +45,23 @@ var app = {
         listeningElement.setAttribute('style', 'display:none;');
         receivedElement.setAttribute('style', 'display:block;');
         console.log('Received Event: ' + id);
+    },
+    addCamera: function() {
+        function onSuccess(imageData) {
+            var image = document.getElementById('myImage1');
+            image.src = "data:image/jpeg;base64," + imageData;
+        }
+
+        function onFail(message) {
+            alert('------------Failed because: ' + message);
+        }
+
+        var image = document.getElementById("myImage");
+        image.addEventListener("click", function(){
+            navigator.camera.getPicture(onSuccess, onFail, { quality: 100,
+                targetHeight: 200,
+              //  targetWidth: 100,
+                destinationType: Camera.DestinationType.DATA_URL});
+        });
     }
 };
